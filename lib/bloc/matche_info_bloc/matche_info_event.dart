@@ -7,4 +7,12 @@ abstract class MatcheInfoEvent extends Equatable {
   List<Object?> get props => throw UnimplementedError();
 }
 
-class GetMatcheInfo extends MatcheInfoEvent {}
+class GetMatcheInfo extends MatcheInfoEvent {
+  final int matchId;
+
+  GetMatcheInfo(this.matchId);
+
+  @override
+  List<Object?> get props => [matchId];
+
+}

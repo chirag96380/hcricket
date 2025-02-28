@@ -123,21 +123,41 @@ class MatchHttpApiRepository
     }
   }
 
+  // @override
+  // Future<LeanbackModel> getLeadbackMatcheApi(int matchId) async {
+  //   try {
+  //     final response =
+  //         await _apiServices.getApi(AppUrl.leanbackMatchesUrl(matchId));
+  //     return LeanbackModel.fromJson(response);
+  //   } catch (e) {
+  //     throw Exception("Something went wrong: $e");
+  //   }
+  // }
+
   @override
   Future<LeanbackModel> getLeadbackMatcheApi(int matchId) async {
-    try {
-      final response =
-          await _apiServices.getApi(AppUrl.leanbackMatchesUrl(matchId));
-      return LeanbackModel.fromJson(response);
-    } catch (e) {
-      throw Exception("Something went wrong: $e");
+    final response =
+        await _apiServices.getApi(AppUrl.leanbackMatchesUrl(matchId));
+
+    // ✅ Check if response is null
+    if (response == null) {
+      throw Exception("API returned null response");
     }
+
+    // ✅ Check if response is a valid Map
+    if (response is! Map<String, dynamic>) {
+      throw Exception(
+          "Invalid response format: Expected a JSON object but got ${response.runtimeType}");
+    }
+
+    return LeanbackModel.fromJson(response);
   }
 
   @override
-  Future<MatchInfoModel> getMatchInfoApi() async {
+  Future<MatchInfoModel> getMatchInfoApi(int matchId) async {
     try {
-      final response = await _apiServices.getApi(AppUrl.matchesInfoUrl);
+      final response =
+          await _apiServices.getApi(AppUrl.matchesInfoUrl(matchId));
       return MatchInfoModel.fromJson(response);
     } catch (e) {
       throw Exception("Something went wrong: $e");
@@ -145,9 +165,9 @@ class MatchHttpApiRepository
   }
 
   @override
-  Future<SquadsModel> getSquadsApi() async {
+  Future<SquadsModel> getSquadsApi(int matchId) async {
     try {
-      final response = await _apiServices.getApi(AppUrl.squadsUrl);
+      final response = await _apiServices.getApi(AppUrl.squadsUrl(matchId));
       return SquadsModel.fromJson(response);
     } catch (e) {
       throw Exception("Something went wrong: $e");
@@ -161,9 +181,10 @@ class MatchHttpApiRepository
   }
 
   @override
-  Future<MatchOverModel> getOverApi() async {
+  Future<MatchOverModel> getOverApi(int matchId, int endDate, int inning) async {
     try {
-      final response = await _apiServices.getApi(AppUrl.overUrl);
+      final response =
+          await _apiServices.getApi(AppUrl.overUrl(matchId, endDate, inning));
       return MatchOverModel.fromJson(response);
     } catch (e) {
       throw Exception("Something went wrong: $e");

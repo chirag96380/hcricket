@@ -14,7 +14,9 @@ class MatchOverBloc extends Bloc<MatchOverEvent, MatchOverState> {
 
   Future<void> allOver(
       GetAllOverList event, Emitter<MatchOverState> emit) async {
-    await overRepository.getOverApi().then((value) {
+    await overRepository
+        .getOverApi(event.matchId, event.endDate, event.inning)
+        .then((value) {
       emit(state.copyWith(allOverList: ApiResponse.completed(value)));
     });
   }

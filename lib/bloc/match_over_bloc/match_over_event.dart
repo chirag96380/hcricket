@@ -7,4 +7,13 @@ abstract class MatchOverEvent extends Equatable {
   List<Object?> get props => throw UnimplementedError();
 }
 
-class GetAllOverList extends MatchOverEvent {}
+class GetAllOverList extends MatchOverEvent {
+  final int matchId;
+  final int endDate;
+  final int inning;
+
+  GetAllOverList(this.matchId, this.endDate, this.inning);
+
+  @override
+  List<Object?> get props => [matchId, endDate, inning];
+}

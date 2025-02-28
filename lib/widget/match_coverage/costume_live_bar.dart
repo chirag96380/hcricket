@@ -91,21 +91,36 @@ class _CostumeLiveBarState extends State<CostumeLiveBar> {
 
         var partnership = miniScore?.partnership.toString() ?? "0";
 
-        var current1Inning = miniScore?.inningsScores[0].runs ?? '';
-        var current2Inning = miniScore?.inningsScores[1].runs ?? '';
+        // var current1Inning = miniScore?.inningsScores[0].runs ?? '';
+        // var current2Inning = miniScore?.inningsScores[1].runs ?? '';
 
-        var current1Wickets = miniScore?.inningsScores[0].wickets ?? '';
-        var current2Wickets = miniScore?.inningsScores[1].wickets ?? '';
+        // var current1Wickets = miniScore?.inningsScores[0].wickets ?? '';
+        // var current2Wickets = miniScore?.inningsScores[1].wickets ?? '';
 
-        var current1Over = miniScore?.inningsScores[0].overs ?? '';
-        var current2Over = miniScore?.inningsScores[1].overs ?? '';
+        // var current1Over = miniScore?.inningsScores[0].overs ?? '';
+        // var current2Over = miniScore?.inningsScores[1].overs ?? '';
 
-        var team1Name =
-            state.allLeadbackDetails.data?.matchHeader.team1.teamSName ?? '';
-        var team2Name =
-            state.allLeadbackDetails.data?.matchHeader.team2.teamSName ?? '';
+        // var team1Name =
+        //     state.allLeadbackDetails.data?.matchHeader.team1.teamSName ?? '';
+        // var team2Name =
+        //     state.allLeadbackDetails.data?.matchHeader.team2.teamSName ?? '';
 
         var currentStatus = miniScore?.custStatus ?? '';
+
+        var currentInningId = miniScore?.inningsId;
+
+        var currentInningData = miniScore?.inningsScores.firstWhere(
+          (inning) => inning.inningsId == currentInningId,
+        );
+
+        if (currentInningData?.inningsId == -1) {
+          currentInningData = null;
+        }
+
+        var currentInning = currentInningData?.runs ?? '';
+        var currentWickets = currentInningData?.wickets ?? '';
+        var currentOvers = currentInningData?.overs ?? '';
+        var currentTeamName = currentInningData?.batTeamShortName ?? '';
 
         return Padding(
             padding: EdgeInsets.only(
@@ -133,18 +148,20 @@ class _CostumeLiveBarState extends State<CostumeLiveBar> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
+                                    currentTeamName,
                                     // ignore: unnecessary_null_comparison
-                                    current2Inning != null
-                                        ? team1Name
-                                        : team2Name,
+                                    // current2Inning != null
+                                    //     ? team1Name
+                                    //     : team2Name,
                                     style: Appstyle.textstyle13
                                         .copyWith(color: AppColors.primaryText),
                                   ),
                                   Text(
+                                    "${currentInning.toString()} / ${currentWickets.toString()} (${currentOvers.toString()})",
                                     // ignore: unnecessary_null_comparison
-                                    current2Inning != null
-                                        ? "${current1Inning.toString()} / ${current1Wickets.toString()} (${current1Over.toString()})"
-                                        : "${current2Inning.toString()} / ${current2Wickets.toString()} (${current2Over.toString()})",
+                                    // current2Inning != null
+                                    //     ? "${current1Inning.toString()} / ${current1Wickets.toString()} (${current1Over.toString()})"
+                                    //     : "${current2Inning.toString()} / ${current2Wickets.toString()} (${current2Over.toString()})",
                                     style: Appstyle.textstyle17bold,
                                   ),
                                 ],

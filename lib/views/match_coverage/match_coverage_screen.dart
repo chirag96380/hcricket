@@ -23,6 +23,8 @@ class MatchCoverageScreen extends StatefulWidget {
   dynamic matchId;
   dynamic teamName;
   dynamic matchDesc;
+  dynamic endDate;
+  dynamic inning;
 
   MatchCoverageScreen(
       {required this.team1score,
@@ -38,7 +40,9 @@ class MatchCoverageScreen extends StatefulWidget {
       this.seriesName,
       this.matchId,
       this.teamName,
-      this.matchDesc});
+      this.matchDesc,
+      this.endDate,
+      this.inning});
 
   // const MatchCoverageScreen({super.key});
 
@@ -68,6 +72,7 @@ class _MatchCoverageScreenState extends State<MatchCoverageScreen>
 
   @override
   Widget build(BuildContext context) {
+    print("widget.endDate ${widget.endDate}");
     return Scaffold(
       body: Stack(children: [
         SizedBox(
@@ -307,10 +312,18 @@ class _MatchCoverageScreenState extends State<MatchCoverageScreen>
                             matchId: widget.matchId,
                             teamName: widget.team1,
                           ),
-                          const CostumeInfoBar(),
+                          CostumeInfoBar(
+                            matchId: widget.matchId,
+                          ),
                           CostumeScorecardBar(),
-                          const CostumeSquadsBar(),
-                          const CostumeOverBar(),
+                          CostumeSquadsBar(
+                            matchId: widget.matchId,
+                          ),
+                          CostumeOverBar(
+                            matchId: widget.matchId,
+                            endDate: widget.endDate,
+                            inning: widget.inning,
+                          ),
                         ],
                       ),
                     ),

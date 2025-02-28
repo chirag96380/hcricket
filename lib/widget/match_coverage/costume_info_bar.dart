@@ -5,14 +5,14 @@ import 'package:hcricket/bloc/matche_info_bloc/matche_info_bloc.dart';
 import 'package:hcricket/bloc/matche_info_bloc/matche_info_event.dart';
 import 'package:hcricket/bloc/matche_info_bloc/matche_info_state.dart';
 import 'package:hcricket/repositery/match_http_api_repository.dart';
-import 'package:hcricket/services/news_date_formatter.dart';
 import 'package:hcricket/services/time_formatter.dart';
 import 'package:hcricket/services/upcoming_matches_date_formatter.dart';
 import 'package:hcricket/utils/textstyle.dart';
 import 'package:hcricket/utils/utils_exports.dart';
 
 class CostumeInfoBar extends StatefulWidget {
-  const CostumeInfoBar({super.key});
+  final int matchId;
+  const CostumeInfoBar({super.key, required this.matchId});
 
   @override
   State<CostumeInfoBar> createState() => _CostumeInfoBarState();
@@ -31,7 +31,7 @@ class _CostumeInfoBarState extends State<CostumeInfoBar> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => matchInfoBloc..add(GetMatcheInfo()),
+      create: (_) => matchInfoBloc..add(GetMatcheInfo(widget.matchId)),
       child:
           BlocBuilder<MatchInfoBloc, MatchInfoState>(builder: (context, state) {
         var matchFormat = state.allMatchInfoList.data?.matchInfo?.matchFormat;
@@ -100,8 +100,8 @@ class _CostumeInfoBarState extends State<CostumeInfoBar> {
                         8.verticalSpace,
                         _infoText(title: "Stadium", info: stadium.toString()),
                         _infoText(title: "City", info: city.toString()),
-                        // _infoText(title: "Capacity", info: capacity.toString()),
-                        // _infoText(title: "Ends", info: ends.toString()),
+                        _infoText(title: "Capacity", info: capacity.toString()),
+                        _infoText(title: "Ends", info: ends.toString()),
                         _infoText(
                             title: "Hosts to", info: "${city}, ${country}"),
                         8.verticalSpace,

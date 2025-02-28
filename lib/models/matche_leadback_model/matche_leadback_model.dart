@@ -25,7 +25,6 @@ class MiniScore {
   final List<InningsScore> inningsScores;
   final int inningsId;
   final String partnership;
-  final PowerPlay pp;
   final int target;
   final TeamScore batTeamScore;
   final String custStatus;
@@ -43,7 +42,6 @@ class MiniScore {
     required this.inningsScores,
     required this.inningsId,
     required this.partnership,
-    required this.pp,
     required this.target,
     required this.batTeamScore,
     required this.custStatus,
@@ -64,11 +62,10 @@ class MiniScore {
           .map((e) => InningsScore.fromJson(e))
           .toList(),
       inningsId: json['inningsId'],
-      partnership: json['partnership'],
-      pp: PowerPlay.fromJson(json['pp']['powerPlay'][0]),
-      target: json['target'],
+      partnership: json['partnership'] ,
+      target: json['target'] ?? 00,
       batTeamScore: TeamScore.fromJson(json['batTeamScore']),
-      custStatus: json['custStatus'],
+      custStatus: json['custStatus'] ?? '',
     );
   }
 }

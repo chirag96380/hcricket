@@ -12,7 +12,7 @@ class SquadsBloc extends Bloc<SquadsEvent, SquadsState> {
 
   Future<void> _getSquads(
       GetSquads event, Emitter<SquadsState> emit) async {
-    final value = await squadsRepository.getSquadsApi();
+    final value = await squadsRepository.getSquadsApi(event.matchId);
     emit(state.copyWith(squadsList: ApiResponse.completed(value)));
   }
 }

@@ -16,14 +16,17 @@ class AppUrl {
   static var upcomingMatchesUrl = "${baseUrl}matches/v1/upcoming";
   static String leanbackMatchesUrl(int matchId) =>
       "${baseUrl}mcenter/v1/$matchId/leanback";
-  static var matchesInfoUrl = "${baseUrl}mcenter/v1/100238";
-  static var squadsUrl = "${baseUrl}mcenter/v1/100238/teams";
-  static var overUrl =
-      "${baseUrl}mcenter/v1/100238/overs?iid=2&tms=1728231303100";
-  static var leagueUrl = "${baseUrl}teams/v1/league";
-  static String iplSquadsUrl(int matchId) =>   "${baseUrl}teams/v1/$matchId/players";
 
-  
+  static String matchesInfoUrl(int matchId) => "${baseUrl}mcenter/v1/$matchId";
+
+  static String squadsUrl(int matchId) => "${baseUrl}mcenter/v1/$matchId/teams";
+
+  static String overUrl(int matchId, int endDate, int innig) =>
+      "${baseUrl}mcenter/v1/$matchId/overs?iid=$innig&tms=$endDate";
+
+  static var leagueUrl = "${baseUrl}teams/v1/league";
+  static String iplSquadsUrl(int matchId) =>
+      "${baseUrl}teams/v1/$matchId/players";
 
   static var scoreCardUrl = "${baseUrl}mcenter/v1/100238/scard";
 }

@@ -7,4 +7,11 @@ abstract class SquadsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetSquads extends SquadsEvent {}
+class GetSquads extends SquadsEvent {
+  final int matchId;
+
+  GetSquads(this.matchId);
+
+  @override
+  List<Object?> get props => [matchId];
+}

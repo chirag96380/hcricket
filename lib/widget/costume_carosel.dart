@@ -331,6 +331,38 @@ class _CostumeCaroselState extends State<CostumeCarosel> {
 
                 return GestureDetector(
                   onTap: () {
+                    var currentBatTeamId =
+                        match.currBatTeamId; // Get the team currently batting
+
+                    int? liveInningId; // To store the live inning ID
+
+                    // Function to check if inngs2 exists
+                    bool hasInngs2(dynamic teamScore) {
+                      return teamScore?.toJson().containsKey("inngs2") == true;
+                    }
+
+                    // Check if the current batting team is team1
+                    if (currentBatTeamId == match.team1?.teamId) {
+                      if (hasInngs2(run?.team1Score)) {
+                        liveInningId = run?.team1Score?.inngs2
+                            ?.inningsId; // Use inngs2 if it exists
+                      } else {
+                        liveInningId = run?.team1Score?.inngs1
+                            ?.inningsId; // Otherwise, use inngs1
+                      }
+                    }
+
+                    // Check if the current batting team is team2
+                    else if (currentBatTeamId == match.team2?.teamId) {
+                      if (hasInngs2(run?.team2Score)) {
+                        liveInningId = run?.team2Score?.inngs2
+                            ?.inningsId; // Use inngs2 if it exists
+                      } else {
+                        liveInningId = run?.team2Score?.inngs1
+                            ?.inningsId; // Otherwise, use inngs1
+                      }
+                    }
+
                     Navigator.pushNamed(context, RoutesName.matchCoverageScreen,
                         arguments: {
                           "team1run": team1run,
@@ -347,6 +379,8 @@ class _CostumeCaroselState extends State<CostumeCarosel> {
                           "matchId": matchId,
                           "teamName": match.team1?.teamSName,
                           "matchDesc": match.matchFormat,
+                          "endDate": match.endDate,
+                          "inning": liveInningId,
                         });
                   },
                   child: Padding(

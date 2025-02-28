@@ -11,7 +11,9 @@ import 'package:hcricket/utils/utils_exports.dart';
 import 'package:hcricket/widget/widgets_exports.dart';
 
 class CostumeSquadsBar extends StatefulWidget {
-  const CostumeSquadsBar({super.key});
+  final int matchId;
+
+  const CostumeSquadsBar({super.key, required this.matchId});
 
   @override
   State<CostumeSquadsBar> createState() => _CostumeSquadsBarState();
@@ -29,7 +31,7 @@ class _CostumeSquadsBarState extends State<CostumeSquadsBar> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => squadsBloc..add(GetSquads()),
+      create: (_) => squadsBloc..add(GetSquads(widget.matchId)),
       child: BlocBuilder<SquadsBloc, SquadsState>(builder: (context, state) {
         var team1 = state.squadsList.data?.team1?.team?.teamSName;
         var team2 = state.squadsList.data?.team2?.team?.teamSName;

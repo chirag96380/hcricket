@@ -4,24 +4,19 @@ class LiveScoreModel {
   AppIndex? appIndex;
   String? responseLastUpdated;
 
-  LiveScoreModel(
-      {typeMatches,
-      filters,
-      appIndex,
-      responseLastUpdated});
+  LiveScoreModel({typeMatches, filters, appIndex, responseLastUpdated});
 
   LiveScoreModel.fromJson(Map<String, dynamic> json) {
     if (json['typeMatches'] != null) {
       typeMatches = <TypeMatches>[];
       json['typeMatches'].forEach((v) {
-        typeMatches!.add( TypeMatches.fromJson(v));
+        typeMatches!.add(TypeMatches.fromJson(v));
       });
     }
     filters =
-        json['filters'] != null ?  Filters.fromJson(json['filters']) : null;
-    appIndex = json['appIndex'] != null
-        ?  AppIndex.fromJson(json['appIndex'])
-        : null;
+        json['filters'] != null ? Filters.fromJson(json['filters']) : null;
+    appIndex =
+        json['appIndex'] != null ? AppIndex.fromJson(json['appIndex']) : null;
     responseLastUpdated = json['responseLastUpdated'];
   }
 
@@ -61,8 +56,7 @@ class TypeMatches {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['matchType'] = matchType;
     if (seriesMatches != null) {
-      data['seriesMatches'] =
-          seriesMatches!.map((v) => v.toJson()).toList();
+      data['seriesMatches'] = seriesMatches!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -78,9 +72,8 @@ class SeriesMatches {
     seriesAdWrapper = json['seriesAdWrapper'] != null
         ? SeriesAdWrapper.fromJson(json['seriesAdWrapper'])
         : null;
-    adDetail = json['adDetail'] != null
-        ? AdDetail.fromJson(json['adDetail'])
-        : null;
+    adDetail =
+        json['adDetail'] != null ? AdDetail.fromJson(json['adDetail']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -199,10 +192,10 @@ class MatchInfo {
     endDate = json['endDate'];
     state = json['state'];
     status = json['status'];
-    team1 = json['team1'] != null ?  Team1.fromJson(json['team1']) : null;
-    team2 = json['team2'] != null ?  Team1.fromJson(json['team2']) : null;
+    team1 = json['team1'] != null ? Team1.fromJson(json['team1']) : null;
+    team2 = json['team2'] != null ? Team1.fromJson(json['team2']) : null;
     venueInfo = json['venueInfo'] != null
-        ?  VenueInfo.fromJson(json['venueInfo'])
+        ? VenueInfo.fromJson(json['venueInfo'])
         : null;
     currBatTeamId = json['currBatTeamId'];
     seriesStartDt = json['seriesStartDt'];
@@ -212,7 +205,7 @@ class MatchInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['matchId'] = matchId;
     data['seriesId'] = seriesId;
     data['seriesName'] = seriesName;
@@ -256,7 +249,7 @@ class Team1 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['teamId'] = teamId;
     data['teamName'] = teamName;
     data['teamSName'] = teamSName;
@@ -273,13 +266,7 @@ class VenueInfo {
   String? latitude;
   String? longitude;
 
-  VenueInfo(
-      {id,
-      ground,
-      city,
-      timezone,
-      latitude,
-      longitude});
+  VenueInfo({id, ground, city, timezone, latitude, longitude});
 
   VenueInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -291,7 +278,7 @@ class VenueInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['ground'] = ground;
     data['city'] = city;
@@ -356,12 +343,11 @@ class Team1Score {
   Team1Score({inngs1});
 
   Team1Score.fromJson(Map<String, dynamic> json) {
-    inngs1 =
-        json['inngs1'] != null ?  Inngs1.fromJson(json['inngs1']) : null;
+    inngs1 = json['inngs1'] != null ? Inngs1.fromJson(json['inngs1']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (inngs1 != null) {
       data['inngs1'] = inngs1!.toJson();
     }
@@ -385,7 +371,7 @@ class Inngs1 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['inningsId'] = inningsId;
     data['runs'] = runs;
     data['wickets'] = wickets;
@@ -408,7 +394,7 @@ class AdDetail {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['layout'] = layout;
     data['position'] = position;
@@ -444,7 +430,7 @@ class AppIndex {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['seoTitle'] = seoTitle;
     data['webURL'] = webURL;
     return data;

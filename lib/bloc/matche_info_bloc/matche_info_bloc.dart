@@ -12,7 +12,7 @@ class MatchInfoBloc extends Bloc<MatcheInfoEvent, MatchInfoState> {
 
   Future<void> allSeriesList(
       GetMatcheInfo event, Emitter<MatchInfoState> emit) async {
-    await matcheInfoRepository.getMatchInfoApi().then((value) {
+    await matcheInfoRepository.getMatchInfoApi(event.matchId).then((value) {
       emit(state.copyWith(allMatchInfoList: ApiResponse.completed(value)));
     });
   }

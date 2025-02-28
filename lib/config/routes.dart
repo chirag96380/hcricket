@@ -32,20 +32,23 @@ class Routes {
 
         return MaterialPageRoute(
             builder: (context) => MatchCoverageScreen(
-                team1score: args['team1run'],
-                team2score: args['team2run'],
-                team1over: args['team1over'],
-                team2over: args['team2over'],
-                team1wic: args['team1wic'],
-                team2wic: args['team2wic'],
-                team1: args['team1'],
-                team2: args['team2'],
-                tem1flag: args['tem1flag']?.toString() ?? "",
-                tem2flag: args['tem2flag']?.toString() ?? "",
-                seriesName: args['seriesName']?.toString() ?? "",
-                matchId: args['matchId'],
-                teamName: args['teamName'],
-                matchDesc: args['matchDesc']));
+                  team1score: args['team1run'],
+                  team2score: args['team2run'],
+                  team1over: args['team1over'],
+                  team2over: args['team2over'],
+                  team1wic: args['team1wic'],
+                  team2wic: args['team2wic'],
+                  team1: args['team1'],
+                  team2: args['team2'],
+                  tem1flag: args['tem1flag']?.toString() ?? "",
+                  tem2flag: args['tem2flag']?.toString() ?? "",
+                  seriesName: args['seriesName']?.toString() ?? "",
+                  matchId: args['matchId'],
+                  teamName: args['teamName'],
+                  matchDesc: args['matchDesc'],
+                  endDate: int.tryParse(args['endDate'].toString()),
+                  inning: int.tryParse(args['inning'].toString()),
+                ));
       case RoutesName.recentMatchScreen:
         return MaterialPageRoute(
             builder: (context) => const RecentMatchScreen());

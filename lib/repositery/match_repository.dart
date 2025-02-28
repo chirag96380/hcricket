@@ -51,11 +51,11 @@ abstract class LeadbackMatcheRepository {
 }
 
 abstract class MatcheInfoRepository {
-  Future<MatchInfoModel> getMatchInfoApi();
+  Future<MatchInfoModel> getMatchInfoApi(int matchId);
 }
 
 abstract class SquadsRepository {
-  Future<SquadsModel> getSquadsApi();
+  Future<SquadsModel> getSquadsApi(int matchId);
 }
 
 abstract class ScoreCardRepository {
@@ -63,7 +63,7 @@ abstract class ScoreCardRepository {
 }
 
 abstract class OverRepository {
-  Future<MatchOverModel> getOverApi();
+  Future<MatchOverModel> getOverApi(int matchId, int endDate, int inning);
 }
 
 abstract class LeagueRepository {

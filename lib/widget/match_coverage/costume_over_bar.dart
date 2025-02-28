@@ -9,7 +9,15 @@ import 'package:hcricket/widget/costume_divider.dart';
 import 'package:hcricket/widget/widgets_exports.dart';
 
 class CostumeOverBar extends StatefulWidget {
-  const CostumeOverBar({super.key});
+  final int matchId;
+  final int endDate;
+  final int inning;
+
+  const CostumeOverBar(
+      {super.key,
+      required this.matchId,
+      required this.endDate,
+      required this.inning});
 
   @override
   State<CostumeOverBar> createState() => _CostumeOverBarState();
@@ -27,9 +35,11 @@ class _CostumeOverBarState extends State<CostumeOverBar> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => matchOverBloc..add(GetAllOverList()),
+      create: (_) => matchOverBloc
+        ..add(GetAllOverList(widget.matchId, widget.endDate, widget.inning)),
       child:
           BlocBuilder<MatchOverBloc, MatchOverState>(builder: (context, state) {
+        print("widget.inning ${widget.inning}");
         return Padding(
           padding:
               EdgeInsets.only(top: 10.h, left: 10.w, right: 10.w, bottom: 10.w),
